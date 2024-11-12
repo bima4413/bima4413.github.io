@@ -14,7 +14,8 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 title: The Mazhar Memos
-title_separator: "–"
+title_separator: "|"
+subtitle: Learn With Me
 email: bima4413@tamu.edu
 description: >- # this means to ignore newlines until "baseurl:"
   A Creativity Dump.
