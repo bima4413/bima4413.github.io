@@ -1,7 +1,68 @@
----
-# You don't need to edit this file, it's empty on purpose.
-# Edit theme's home layout instead if you wanna make some changes
-# See: https://jekyllrb.com/docs/themes/#overriding-theme-defaults
-layout: home
-author_profile: true
----
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Website</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #ffffff;
+        }
+
+        .logo-container {
+            margin-top: 15vh;
+            margin-bottom: 8vh;
+        }
+
+        .logo {
+            width: 120px;
+            height: 120px;
+            background-color: #f0f0f0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #333;
+        }
+
+        .nav-options {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            padding: 1rem 2rem;
+            text-decoration: none;
+            color: #333;
+            border: 2px solid #333;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background-color: #333;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <div class="logo-container">
+        <div class="logo">
+            LOGO
+        </div>
+    </div>
+
+    <nav class="nav-options">
+        <a href="content.html" class="nav-link">Content</a>
+        <a href="about.html" class="nav-link">About</a>
+    </nav>
+</body>
+</html>
