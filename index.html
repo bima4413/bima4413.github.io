@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Website</title>
+    <title>The Mazhar Memos</title>
     <style>
         body {
             margin: 0;
@@ -17,44 +17,95 @@
         }
 
         .logo-container {
-            margin-top: 15vh;
+            margin-top: 30vh;
             margin-bottom: 8vh;
         }
 
         .logo {
-            width: 50px;
-            height: auto; /* Changed to auto to maintain image aspect ratio */
+            width: 600px;
+            height: auto;
+             /* Changed to auto to maintain image aspect ratio */
             /* Removed background-color and border-radius since we're using an image */
         }
-
-        .nav-options {
-            display: flex;
-            gap: 2rem;
+        /* Normal breathing animation */
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); } /* Slightly enlarges in the middle of the animation */
         }
 
-        .nav-link {
-            padding: 1rem 2rem;
-            text-decoration: none;
-            color: #333;
-            border: 2px solid #333;
-            border-radius: 4px;
-            transition: all 0.3s ease;
+        /* Slower idle breathing animation */
+        @keyframes slowBreathe {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
 
-        .nav-link:hover {
-            background-color: #333;
-            color: #ffffff;
+        /* Apply the breathing animation by default */
+        #logo {
+            animation: breathe 3s ease-in-out infinite; /* Normal speed breathing */
+            transition: all 0.5s ease;
         }
+
+        /* Apply slower breathing when idle */
+        #logo.idle {
+            animation: slowBreathe 6s ease-in-out infinite; /* Slower breathing */
+        }
+
+
+
     </style>
 </head>
 <body>
     <div class="logo-container">
-        <img src="assets/logo.png" alt="The Mazhar Memos Logo" class="logo">
+        <img src="assets/logo.png" alt="The Mazhar Memos Logo" class="logo" id="logo">
     </div>
 
     <nav class="nav-options">
         <a href="content.html" class="nav-link">Content</a>
         <a href="about.html" class="nav-link">About</a>
     </nav>
+    <!-- JavaScript goes here, right before the closing body tag -->
+    <script>
+        let logo = document.getElementById('logo');
+        let idleTimeout;
+        let waveInterval;
+
+        function startWaveAnimation() {
+            // Clear any existing interval to avoid stacking intervals
+            clearInterval(waveInterval);
+
+            // Apply small, random transformations periodically
+            waveInterval = setInterval(() => {
+                const randomX = Math.random() * 10 - 5; // Random value between -5 and 5
+                const randomY = Math.random() * 5 - 2.5; // Random value between -2.5 and 2.5
+                const randomRotate = Math.random() * 4 - 2; // Random value between -2 and 2 degrees
+
+                logo.style.transform = `translate(${randomX}px, ${randomY}px) rotate(${randomRotate}deg)`;
+            }, 200); // Update every 200ms for a fluid effect
+        }
+
+        function startIdleAnimation() {
+            logo.classList.add('idle');  // Slower movement when idle
+            clearInterval(waveInterval); // Stop random wave changes
+        }
+
+        function resetIdleTimer() {
+            logo.classList.remove('idle');
+            clearTimeout(idleTimeout);
+            clearInterval(waveInterval);
+            startWaveAnimation(); // Start random wave animation again
+            idleTimeout = setTimeout(startIdleAnimation, 5000); // 5 seconds of inactivity
+        }
+
+        // Listen for user interactions
+        document.addEventListener('mousemove', resetIdleTimer);
+        document.addEventListener('keypress', resetIdleTimer);
+
+        // Start the wave animation and idle timer initially
+        startWaveAnimation();
+        resetIdleTimer();
+
+
+
+    </script>
 </body>
 </html>
