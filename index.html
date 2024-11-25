@@ -28,27 +28,19 @@
             /* Removed background-color and border-radius since we're using an image */
         }
         /* Normal breathing animation */
-        @keyframes breathe {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); } /* Slightly enlarges in the middle of the animation */
-        }
+        /* Breathing animation keyframes */
 
-        /* Slower idle breathing animation */
-        @keyframes slowBreathe {
+        @keyframes breathe {
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.05); }
         }
 
-        /* Apply the breathing animation by default */
+        /* Apply breathing animation to the logo */
         #logo {
-            animation: breathe 3s ease-in-out infinite; /* Normal speed breathing */
-            transition: all 1.5s ease;
+            animation: breathe 3s ease-in-out infinite; /* Default duration is 3 seconds */
+            transition: all 1s ease; /* Smooth transition for any style changes */
         }
 
-        /* Apply slower breathing when idle */
-        #logo.idle {
-            animation: slowBreathe 6s ease-in-out infinite; /* Slower breathing */
-        }
 
 
 
@@ -67,42 +59,24 @@
     <script>
         let logo = document.getElementById('logo');
         let idleTimeout;
-        let waveInterval;
-
-        function startWaveAnimation() {
-            // Clear any existing interval to avoid stacking intervals
-            clearInterval(waveInterval);
-
-            // Apply small, random transformations periodically
-            waveInterval = setInterval(() => {
-                const randomX = Math.random() * 10 - 5; // Random value between -5 and 5
-                const randomY = Math.random() * 5 - 2.5; // Random value between -2.5 and 2.5
-                const randomRotate = Math.random() * 4 - 2; // Random value between -2 and 2 degrees
-
-                logo.style.transform = `translate(${randomX}px, ${randomY}px) rotate(${randomRotate}deg)`;
-            }, 200); // Update every 200ms for a fluid effect
-        }
 
         function startIdleAnimation() {
-            logo.classList.add('idle');  // Slower movement when idle
-            clearInterval(waveInterval); // Stop random wave changes
+            logo.style.animationDuration = "6s"; // Slow down the animation smoothly
         }
 
         function resetIdleTimer() {
-            logo.classList.remove('idle');
+            logo.style.animationDuration = "3s"; // Restore the default speed
             clearTimeout(idleTimeout);
-            clearInterval(waveInterval);
-            startWaveAnimation(); // Start random wave animation again
             idleTimeout = setTimeout(startIdleAnimation, 5000); // 5 seconds of inactivity
         }
 
-        // Listen for user interactions
+        // Listen for user interactions to reset the idle timer
         document.addEventListener('mousemove', resetIdleTimer);
         document.addEventListener('keypress', resetIdleTimer);
 
-        // Start the wave animation and idle timer initially
-        startWaveAnimation();
+        // Start the idle timer initially
         resetIdleTimer();
+
 
 
 
