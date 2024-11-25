@@ -14,6 +14,7 @@
             align-items: center;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             background-color: #ffffff;
+            overflow: hidden;
         }
 
         .logo-container {
@@ -35,27 +36,74 @@
             50% { transform: scale(1.05); }
         }
 
-        /* Apply breathing animation to the logo */
+        /* Apply breathing animation to the logo, and intro animation */
         #logo {
+            animation: flyFromTop 1.5s ease-out forwards;
+            transform: translateY(-200px); /* Start position for animation */
+
             animation: breathe 3s ease-in-out infinite; /* Default duration is 3 seconds */
             transition: all 1s ease; /* Smooth transition for any style changes */
         }
+        /* Subtitle styles */
+        .subtitle {
+            margin-top: 10px;
+            font-size: 1.5rem;
+            color: #333;
+            opacity: 0;
+            animation: fadeIn 2s ease-in forwards;
+        }
 
+        /* Button styles */
+        .button {
+            width: 400px; /* Default size for buttons */
+            margin-top: 20px;
+            transform: translateY(200px); /* Start position for animation */
+            opacity: 0;
+            animation: flyFromBottom 1.5s ease-out forwards;
+        }
 
+        .button.about {
+            width: 300px; /* Smaller size for the "About" button */
+        }
 
+        /* Animations */
+        @keyframes flyFromTop {
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes flyFromBottom {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
 
     </style>
 </head>
+<!-- BODY START-->
 <body>
     <div class="logo-container">
+        <!-- Logo png-->>
         <img src="assets/logo.png" alt="The Mazhar Memos Logo" class="logo" id="logo">
     </div>
 
     <nav class="nav-options">
-        <a href="content.html" class="nav-link">Content</a>
-        <a href="about.html" class="nav-link">About</a>
+        <!-- Content Button png -->
+        <img src="assets/content-button.png" alt="Content Button" class="button content">
+
+        <!-- About Button png -->
+        <img src="assets/about-button.png" alt="About Button" class="button about">
+    
     </nav>
-    <!-- JavaScript goes here, right before the closing body tag -->
+    <!-- JAVASCRIPT START -->
     <script>
         let logo = document.getElementById('logo');
         let idleTimeout;
@@ -78,8 +126,10 @@
         resetIdleTimer();
 
 
-
-
     </script>
+<!-- JAVASCRIPT END -->
+
 </body>
+<!-- BODY END-->
+
 </html>
