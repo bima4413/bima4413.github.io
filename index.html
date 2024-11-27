@@ -2,125 +2,109 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Mazhar Memos</title>
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: #ffffff;
-            overflow: hidden;
-        }
-
-
-        /* Normal breathing animation */
-        /* Breathing animation keyframes */
-
+        
         @keyframes breathe {
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.05); }
         }
 
-        /* Apply breathing animation to the logo, and intro animation */
-        #logo {
-            animation: flyFromTop 1.5s ease-out forwards;
-            transform: translateY(-200px); /* Start position for animation */
-
-            animation: breathe 3s ease-in-out infinite; /* Default duration is 3 seconds */
-            transition: all 1s ease; /* Smooth transition for any style changes */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(80px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
-        /* Subtitle styles */
+
+        html, body{
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        body {
+            opacity: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            animation: fadeIn 1.5s ease-out forwards;
+            animation-delay: 0.3s;
+        }
+        
+        .logo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px; /* Adds space between elements */
+            margin-top: 150px;
+        }
+
+        .logo {
+            max-width: 950px; /* Adjust as needed */
+            animation: breathe 5s ease-in-out infinite;
+            transition: transform 2s;
+    
+        }
+
         .subtitle {
-            margin-top: 20px;
-            font-size: 1.5rem;
-            color: #333;
-            opacity: 0;
-            animation: fadeIn 2s ease-in forwards;
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            color: #000000;
+            text-align: center;
+            font-size: 1.2rem;
+            letter-spacing: 1.5px;
+            margin-top: 10px; /* Adjust spacing */
+            transition: transform 0.5s;
+            text-shadow: 4px 4px 10px rgb(94, 94, 94);
+        }
+        .subtitle:hover {
+            transform: scale(1.05);
+        }
+        .bottom-text {
+            text-shadow: 0px 0px 0px rgb(94, 94, 94);
+            font-size: 0.8rem;
+            padding: 100px;
+            text-align: center;
         }
 
-        /* Button styles */
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px; /* Space between buttons */
+        }
+
         .button {
-            width: 400px; /* Default size for buttons */
-            margin-top: 40px;
-            transform: translateY(200px); /* Start position for animation */
-            opacity: 0;
-            animation: flyFromBottom 1.5s ease-out forwards;
+            max-width: 300px; /* Adjust button size as needed */
+            cursor: pointer;
+            transition: transform 0.5s;
+            margin-top: 10px;
         }
 
         .button.about {
-            margin-top: 80px; /* Moves the "About" button down */
-            width: 200px; /* Smaller size for the "About" button */
+            max-width: 200px;
         }
 
-        /* Animations */
-        @keyframes flyFromTop {
-            to {
-                transform: translateY(0);
-            }
+        .button:hover {
+            transform: scale(1.2);
         }
-
-        @keyframes flyFromBottom {
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        @keyframes fadeIn {
-            to {
-                opacity: 1;
-            }
-        }
-
     </style>
 </head>
-<!-- BODY START-->
 <body>
     <div class="logo-container">
-        <!-- Logo png-->
-        <img src="assets/logo.png" alt="The Mazhar Memos Logo" class="logo" id="logo">
+        <img src="assets/logo.png" alt="The Mazhar Memos Logo" class="logo">
+        <div class="subtitle">Unveiling Stories, Connecting Worlds...</div>
+        <div class="button-container">
+            <img src="assets/enter-button.png" alt="Enter Button" class="button enter">
+            <img src="assets/about-button.png" alt="About Button" class="button about">
+        </div>
     </div>
-
-    <nav class="nav-options">
-        <!-- Enter Button png -->
-        <img src="assets/enter-button.png" alt="Enter Button" class="button enter">
-
-        <!-- About Button png -->
-        <img src="assets/about-button.png" alt="About Button" class="button about">
-    
-    </nav>
-    <!-- JAVASCRIPT START -->
-    <script>
-        let logo = document.getElementById('logo');
-        let idleTimeout;
-
-        function startIdleAnimation() {
-            logo.style.animationDuration = "6s"; // Slow down the animation smoothly
-        }
-
-        function resetIdleTimer() {
-            logo.style.animationDuration = "3s"; // Restore the default speed
-            clearTimeout(idleTimeout);
-            idleTimeout = setTimeout(startIdleAnimation, 5000); // 5 seconds of inactivity
-        }
-
-        // Listen for user interactions to reset the idle timer
-        document.addEventListener('mousemove', resetIdleTimer);
-        document.addEventListener('keypress', resetIdleTimer);
-
-        // Start the idle timer initially
-        resetIdleTimer();
-
-
-    </script>
-<!-- JAVASCRIPT END -->
-
+    <footer class="bottom-text">A Website by Bilal Mazhar</footer>
 </body>
-<!-- BODY END-->
-
 </html>
